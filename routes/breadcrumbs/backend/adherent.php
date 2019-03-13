@@ -1,6 +1,6 @@
 <?php
 
-Breadcrumbs::for('admin.adherent.index', function ($trail) {
+Breadcrumbs::for('admin.adherents.index', function ($trail) {
     $trail->parent('admin.dashboard');
     $trail->push('adherents management', url('admin/adherents'));
 });
@@ -10,9 +10,9 @@ Breadcrumbs::for('admin.adherent.show', function ($trail  , $id) {
     $trail->push('view adherent ', url('admin/adherent/', $id));
 });
 
-Breadcrumbs::for('admin.adherent.create', function ($trail ) {
-    $trail->parent('admin.adherent.index');
-    $trail->push('new adherent', url('admin/adherentCreate'));
+Breadcrumbs::for( 'admin.adherents.create', function ($trail ) {
+    $trail->parent('admin.adherents.index');
+    $trail->push('new adherent', url('admin/adherent/create'));
 });
 
 

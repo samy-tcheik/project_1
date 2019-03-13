@@ -51,7 +51,7 @@
 
                 <ul class="nav-dropdown-items">
                     <li class="nav-item">
-                        <a class="nav-link {{ active_class(Active::checkUriPattern('admin/log-viewer/logs*')) }}" href="{{ route('admin.adherent.index') }}">
+                        <a class="nav-link {{ active_class(Active::checkUriPattern('admin/log-viewer/logs*')) }}" href="{{ route('admin.adherents.index') }}">
                             liste des adhérents
                         </a>
                     </li>

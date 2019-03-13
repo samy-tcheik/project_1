@@ -11,7 +11,7 @@
             <h5 class="card-title">Adhérent info</h5>
             <hr>
                 @csrf     {{--adherent  inf--}}
-                {{html()->form('post' ,Route('admin.adherent.store') )->open()}}
+                {{html()->form('post' ,Route('admin.adherents.store') )->open()}}
 
 
            @include('backend.adherent.form')
@@ -29,7 +29,7 @@
 
             <div class="row">
                 <div class="col">
-                    {{ form_cancel(route('admin.adherent.index'), __('buttons.general.cancel')) }}
+                    {{ form_cancel(route('admin.adherents.index'), __('buttons.general.cancel')) }}
                 </div><!--col-->
 
                 <div class="col text-right">

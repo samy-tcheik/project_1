@@ -12,11 +12,7 @@
         <div class="card-body">
             <h5 class="card-title">Adhérent info</h5>
             <hr>
-
-
-                {{ html()->modelForm($adherent)->action(route('admin.adherent.update',['id'=> $adherent->id]))->open() }}
-
-
+            {{ html()->modelForm($adherent)->action(route('admin.adherent.update', $adherent->id))->open() }}
             @include('backend.adherent.form')
 
         </div>
