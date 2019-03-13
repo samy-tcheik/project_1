@@ -44,14 +44,19 @@ class AdherentController extends Controller
      */
     public function create()
     {
-        return  view('backend.adherent.create'  ,[
-            'juridics'  =>   Juridic_form::all()->pluck('designation' ,'id') ,
-            'status'    =>   Statu::all()->pluck('desi','id') ,
-            'regions'   =>   Region::all()->pluck('designation' , 'id'),
-            "cities"    =>   City::all()->pluck('designation','id') ,
-            'countries' =>   Country::all()->pluck('designation','id'),
-            'sectors'   =>   Sector::all()->pluck('designation','id'),
-            'activity'  =>   Activity::all()->pluck('designation','id') ]);
+        return  view('backend.adherent.create'  ,$this->relativeDate());
+    }
+
+    private function relativeDate() {
+        return [
+            'juridics'  =>   Juridic_form::all()->pluck('designation',' id'),
+            'status'    =>   Statu::all()->pluck('desi',' id'),
+            'regions'   =>   Region::all()->pluck('designation', 'id'),
+            "cities"    =>   City::all()->pluck('designation',' id'),
+            'countries' =>   Country::all()->pluck('designation',' id'),
+            'sectors'   =>   Sector::all()->pluck('designation',' id'),
+            'activity'  =>   Activity::all()->pluck('designation',' id')
+        ];
     }
 
     /**
@@ -62,13 +67,15 @@ class AdherentController extends Controller
      */
     public function store(StoreAdherentRequest $request)
     {
-
        $data = $request->all();
+
        $data['created_by'] = Auth::id();
+
        if(!array_key_exists( 'regime_annee_civile' , $data )){
            $data['regime_annee_civile'] = 0 ;
        }
-        Adherent::create($data);
+
+       Adherent::create($data);
        return redirect()->to(route('admin.adherent.index'))->withFlashSuccess('adherent successfully added');
     }
 
@@ -78,9 +85,9 @@ class AdherentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show( Adherent $adherent)
     {
-        return  view('backend.adherent.show' ,['adherent'=>  Adherent::with('statu','juridic','activity' ,'country' , 'sector' ,'region' ,'city')->find($id)]);
+        return  view('backend.adherent.show' , compact('adherent'));
     }
 
     /**

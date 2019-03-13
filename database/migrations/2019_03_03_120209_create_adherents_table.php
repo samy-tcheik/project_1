@@ -15,10 +15,10 @@ class CreateAdherentsTable extends Migration
     {
         Schema::create('adherents', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->nullable();
+            $table->string('name')->unique();
             $table->string('dossier')->nullable();
-        
-            $table->integer('juridic_form_id')->unsigned()->nullable();     
+
+            $table->integer('juridic_form_id')->unsigned()->nullable();
             $table->foreign('juridic_form_id')->references('id')->on('juridic_forms')->onDelete('cascade');
 
             $table->integer('statu_id')->unsigned()->nullable();
