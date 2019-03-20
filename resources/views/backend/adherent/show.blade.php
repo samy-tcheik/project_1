@@ -46,7 +46,7 @@
                                         </tr>
                                         <tr>
                                             <th>statu</th>
-                                            <td>{{$adherent->statu->desi}}</td>
+                                            <td>{{$adherent->statu->designation}}</td>
                                         </tr>
                                         <tr>
                                             <th>regime année civile</th>

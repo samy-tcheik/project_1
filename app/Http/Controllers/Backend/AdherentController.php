@@ -2,18 +2,27 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Requests\Backend\StoreAdherentRequest;
-use App\Models\Activity;
-use App\Models\adherent\Adherent;
+
 use App\Models\City;
-use App\Models\Country;
+use App\Models\Statu;
 use App\Models\Region;
 use App\Models\Sector;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Models\Country;
+use App\Models\Activity;
 use App\Models\Juridic_form;
-use App\Models\Statu;
-use Auth;
+use App\Models\adherent\Adherent;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Backend\StoreAdherentRequest;
+
+
+
+
+
+
+
+
+
+
 
 
 class AdherentController extends Controller
@@ -25,15 +34,17 @@ class AdherentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $adherents = Adherent::with('statu','juridic','activity')->Simplepaginate(10);
+    public function index(){
 
+
+        $adherents = Adherent::with('statu','juridic','activity')->Simplepaginate(10);
         return  view('backend.adherent.index')->with('adherents' ,$adherents );
     }
-    public function archive()
-    {
-        return  view('backend.adherent.archive')->with('adherents' ,Adherent::with('statu','juridic','activity')->onlyTrashed()->Simplepaginate(10) );
+
+    public function archive(){
+        return  view('backend.adherent.archive')->with('adherents' ,Adherent::with('statu','juridic','activity')
+            ->onlyTrashed()
+            ->Simplepaginate(10) );
     }
 
 
@@ -42,21 +53,22 @@ class AdherentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        return  view('backend.adherent.create'  ,$this->relativeDate());
+    public function create(){
+        return  view('backend.adherent.create'  ,$this->relativeData());
     }
 
-    private function relativeDate() {
+    private function relativeData(){
         return [
-            'juridics'  =>   Juridic_form::all()->pluck('designation',' id'),
-            'status'    =>   Statu::all()->pluck('desi',' id'),
+            'juridics'  =>   Juridic_form::all()->pluck('designation','id'),
+            'status'    =>   Statu::all()->pluck('designation','id'),
             'regions'   =>   Region::all()->pluck('designation', 'id'),
-            "cities"    =>   City::all()->pluck('designation',' id'),
-            'countries' =>   Country::all()->pluck('designation',' id'),
-            'sectors'   =>   Sector::all()->pluck('designation',' id'),
-            'activity'  =>   Activity::all()->pluck('designation',' id')
+            "cities"    =>   City::all()->pluck('designation','id'),
+            'countries' =>   Country::all()->pluck('designation','id'),
+            'sectors'   =>   Sector::all()->pluck('designation','id'),
+            'activity'  =>   Activity::all()->pluck('designation','id')
         ];
+
+
     }
 
     /**
@@ -65,18 +77,15 @@ class AdherentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreAdherentRequest $request)
-    {
-       $data = $request->all();
+    public function store(StoreAdherentRequest $request){
 
-       $data['created_by'] = Auth::id();
-
-       if(!array_key_exists( 'regime_annee_civile' , $data )){
-           $data['regime_annee_civile'] = 0 ;
-       }
-
-       Adherent::create($data);
-       return redirect()->to(route('admin.adherent.index'))->withFlashSuccess('adherent successfully added');
+        try{
+            Adherent::create($request->all());
+        }  catch (Exception $e){
+        //
+        }
+        return redirect()->to(route('admin.adherents.index'))
+           ->withFlashSuccess('adherent successfully added');
     }
 
     /**
@@ -96,18 +105,11 @@ class AdherentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit( $id)
+    public function edit(Adherent $adherent)
     {
-       // dd($adherent);
-        return  view('backend.adherent.edit', [
-            'juridics'  =>   Juridic_form::all()->pluck('designation' ,'id') ,
-            'status'    =>   Statu::all()->pluck('desi','id') ,
-            'regions'   =>   Region::all()->pluck('designation' , 'id'),
-            "cities"    =>   City::all()->pluck('designation','id') ,
-            'countries' =>   Country::all()->pluck('designation','id'),
-            'sectors'   =>   Sector::all()->pluck('designation','id'),
-            'activity'  =>   Activity::all()->pluck('designation','id'),
-        'adherent' => Adherent::find($id)]);
+
+        return  view('backend.adherent.edit',
+            array_merge( $this->relativeData() ,compact('adherent' , $adherent)));
     }
 
     /**
@@ -117,15 +119,17 @@ class AdherentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreAdherentRequest $request, $id)
+    public function update(StoreAdherentRequest $request, Adherent $adherent)
     {
-        $data = $request->all();
-        if(!array_key_exists( 'regime_annee_civile' , $data )){
-            $data['regime_annee_civile'] = 0 ;
+        try{
+            $adherent->update(array_merge($request->all() ,['regime_annee_civile'=>isset($request['regime_annee_civile']) ? 1:0]) ) ;
         }
+        catch (Exception $exception){
+            //
+            }
 
-        Adherent::find($id)->update($data) ;
-        return redirect()->to(route('admin.adherent.index'))->withFlashSuccess(' adherent successfully updated');
+        return redirect()->to(route('admin.adherents.index'))
+            ->withFlashSuccess(' adherent successfully updated');
     }
 
     /**
@@ -134,7 +138,7 @@ class AdherentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function delete($id)
+    public function destroy($id)
     {
        Adherent::find($id)->delete();
         return redirect()->back()->withFlashSuccess('ahderent succefully deleted');
@@ -143,6 +147,7 @@ class AdherentController extends Controller
     public function restore($id){
 
         Adherent::withTrashed()->find($id)->restore();
-        return redirect()->to(route('admin.adherent.archive'))->withFlashSuccess(' adherent successfully restored');
+        return redirect()->to(route('admin.adherent.archive'))
+            ->withFlashSuccess(' adherent successfully restored');
     }
 }

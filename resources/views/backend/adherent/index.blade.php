@@ -38,22 +38,51 @@
                                 <td>{{$adh->name}}</td>
                                 <td>{{$adh->dossier}}</td>
                                 <td>
-                                    {{-- {{$adh->statu->desi}} --}}
+                                     {{$adh->statu->designation}}
                                 </td>
                                 <td>
-                                    {{-- {{$adh->juridic->designation}} --}}
+                                     {{$adh->juridic->designation}}
                                 </td>
                                 <td>
-                                    {{-- {{$adh->activity->designation}} --}}
+                                     {{$adh->activity->designation}}
                                 </td>
-                                <td>{{$adh->type}}</td>
+                                <td>
+                                    {{html()->select('type' ,config('type') ,$adh->type)->attribute('disabled')->class('form-control')}}
+
+                                </td>
                                 <td><div class="btn-group" role="group" aria-label="Basic example">
-                                        <a href='{{route("admin.adherent.show" ,['id'  =>  $adh->id])}}'type="button" class="btn-lg btn-primary  icon-eye" data-toggle="tooltip"  title="{{__('buttons.general.crud.view')}}"></a>
-                                        <a href='{{route("admin.adherent.edit" ,['id'  =>  $adh->id])}}' class="btn-lg btn-secondary icon-pencil" data-toggle="tooltip"  title="{{__('buttons.general.crud.edit')}}"></a>
-                                        <a href='{{route("admin.adherent.delete" ,  $adh->id)}}' class="btn-lg btn-danger icon-close" data-toggle="tooltip"  title="{{__('buttons.general.crud.delete')}}"></a>
+                                        <a href='{{route("admin.adherents.show" ,$adh)}}'type="button" class="btn-lg btn-primary  icon-eye" data-toggle="tooltip"  title="{{__('buttons.general.crud.view')}}"></a>
+                                        <a href='{{route("admin.adherents.edit" ,$adh)}}' class="btn-lg btn-secondary icon-pencil" data-toggle="tooltip"  title="{{__('buttons.general.crud.edit')}}"></a>
+                                        <button type="button" class="btn-lg btn-danger icon-close" data-toggle="modal" data-target="#confirm" data-id="{{$adh->id}}" data-name="{{$adh->name}}" title="{{__('buttons.general.crud.delete')}}" ></button>
                                     </div></td>
                                 </tr>
                             @endforeach
+                            <div class="modal fade" id="confirm" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalCenterTitle">Confirm delete</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body h5">
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <form  id="deleteForm" method="post">
+                                                <input type="hidden" name="_method" value="DELETE">
+                                                @csrf
+
+                                                <button id="delete" class="btn btn-danger">Confirm delete</button>
+
+                                            </form>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
                         </tbody>
                     </table>
@@ -80,4 +109,22 @@
 
     </div><!--card-body-->
 </div><!--card-->
+
 @endsection
+
+@push('myscript')
+    <script>
+
+        $("#confirm").on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget)
+            var id = button.data('id')
+            var name = button.data('name')
+            var modal = $(this)
+            modal.find('.modal-body').text('do you really want to delete '  + name )
+            modal.find('#deleteForm').attr('action' ,'/admin/adherents/' + id )
+
+        })
+    </script>
+
+
+    @endpush

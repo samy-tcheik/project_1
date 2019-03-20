@@ -8,14 +8,15 @@
     <div class="card">
         <h3 class="card-header">Nouveaux Adhérent </h3>
         <div class="card-body">
-            <h5 class="card-title">Adhérent info</h5>
-            <hr>
+
                 @csrf     {{--adherent  inf--}}
                 {{html()->form('post' ,Route('admin.adherents.store') )->open()}}
 
-
+            <div class="">
+                <div class="row">
            @include('backend.adherent.form')
-
+            </div>
+            </div>
 
 
 

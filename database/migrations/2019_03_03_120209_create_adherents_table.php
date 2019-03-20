@@ -24,7 +24,7 @@ class CreateAdherentsTable extends Migration
             $table->integer('statu_id')->unsigned()->nullable();
             $table->foreign('statu_id')->references('id')->on('status')->onDelete('cascade');
 
-            $table->boolean('regime_annee_civile');
+            $table->boolean('regime_annee_civile')->default(0);
             $table->date('adhesion_date')->nullable();
             $table->text('description')->nullable();
 
@@ -61,10 +61,10 @@ class CreateAdherentsTable extends Migration
             $table->string('rc')->nullable();
             $table->string('effectif')->nullable();
             $table->double('ca', 10, 2)->nullable();
-            $table->enum('currency_ca', ['dzd' , 'euro'])->nullable();
+            $table->integer('currency_ca')->nullable();
             $table->double('cs', 10, 2)->nullable();
-            $table->enum('currency_cs', ['dzd', 'euro'])->nullable();
-            $table->enum('type', ['actif', 'algerien', 'etranger'])->nullable();
+            $table->integer('currency_cs')->nullable();
+            $table->integer('type')->nullable();
 
 
             $table->integer('created_by')->unsigned();

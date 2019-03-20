@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\adherent\Adherent;
 use App\Models\Auth\User;
+use App\Observers\AdherentObserver;
 use App\Observers\User\UserObserver;
 use Illuminate\Support\ServiceProvider;
 
@@ -19,6 +21,7 @@ class ObserverServiceProvider extends ServiceProvider
     public function boot()
     {
         User::observe(UserObserver::class);
+        Adherent::observe(AdherentObserver::class);
     }
 
     /**

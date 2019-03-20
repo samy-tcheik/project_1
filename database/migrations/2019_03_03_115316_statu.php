@@ -15,7 +15,7 @@ class Statu extends Migration
     {
         Schema::create('status', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('desi') ;
+            $table->string('designation') ;
             $table->timestamps();
         });
     }

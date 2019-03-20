@@ -24,13 +24,17 @@ class StoreAdherentRequest extends FormRequest
     public function rules()
     {
              return  [
-                 'name' =>'required|max:191',
-                  'dossier' =>'string',
-                  'juridic' =>'string',
-                  'statu' =>'string',
-                  'regime' =>'string',
-                  'description' =>'string',
-                  'tel1'=>'numeric',
+                    'name' =>'required|max:191',
+                    'dossier' =>'string',
+                    'juridic_form_id' =>'required|string',
+                    'statu_id' =>'required|string',
+                    'region_id' =>'required|string',
+                    'city_id' =>'required|string',
+                    'country_id' =>'required|string',
+                    'sector_id' =>'required|string',
+                    'activity_id' =>'required|string',
+                    'description' =>'string',
+                    'tel1'=>'numeric',
 
              ];
 

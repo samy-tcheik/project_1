@@ -5,25 +5,25 @@ Breadcrumbs::for('admin.adherents.index', function ($trail) {
     $trail->push('adherents management', url('admin/adherents'));
 });
 
-Breadcrumbs::for('admin.adherent.show', function ($trail  , $id) {
-    $trail->parent('admin.adherent.index');
-    $trail->push('view adherent ', url('admin/adherent/', $id));
+Breadcrumbs::for('admin.adherents.show', function ($trail  , $adherent) {
+    $trail->parent('admin.adherents.index');
+    $trail->push('view adherent ', url('admin/adherents/', $adherent));
 });
 
 Breadcrumbs::for( 'admin.adherents.create', function ($trail ) {
     $trail->parent('admin.adherents.index');
-    $trail->push('new adherent', url('admin/adherent/create'));
+    $trail->push('new adherent', url('admin/adherents/create'));
 });
 
 
-Breadcrumbs::for('admin.adherent.edit', function ($trail,$id) {
-    $trail->parent('admin.adherent.index');
-    $trail->push('edit adherent', url('admin/adherentEdit/',$id));
+Breadcrumbs::for('admin.adherents.edit', function ($trail,$adherent) {
+    $trail->parent('admin.adherents.index');
+    $trail->push('edit adherent', url('admin/adherents/{adherent}/Edit/',$adherent));
 });
 
 
 Breadcrumbs::for('admin.adherent.archive', function ($trail) {
-    $trail->parent('admin.adherent.index');
+    $trail->parent('admin.adherents.index');
     $trail->push('adherent archive', url('admin/adherentArchive/'));
 });
 /*Breadcrumbs::for('log-viewer::logs.list', function ($trail) {

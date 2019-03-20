@@ -10,10 +10,14 @@
     <div class="card">
         <h3 class="card-header">Modifier Adhérent </h3>
         <div class="card-body">
-            <h5 class="card-title">Adhérent info</h5>
-            <hr>
-            {{ html()->modelForm($adherent)->action(route('admin.adherent.update', $adherent->id))->open() }}
+
+            {{ html()->modelForm($adherent)->action(route('admin.adherents.update', $adherent))->open() }}
+            {{html()->input('hidden','_method','PUT')}}
+
+                <div class="row">
             @include('backend.adherent.form')
+                </div>
+
 
         </div>
 
@@ -21,7 +25,7 @@
 
                 <div class="row">
                     <div class="col">
-                        {{ form_cancel(route('admin.adherent.index'), __('buttons.general.cancel')) }}
+                        {{ form_cancel(route('admin.adherents.index'), __('buttons.general.cancel')) }}
                     </div><!--col-->
 
                     <div class="col text-right">
