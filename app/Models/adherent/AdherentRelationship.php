@@ -3,9 +3,12 @@ namespace App\Models\adherent;
 
 
 trait AdherentRelationship{
+    public function cotiser(){
+        return $this->hasMany('App\Models\Cotisation',"adherents_id");
+    }
 
     public function statu(){
-        return  $this->belongsTo('App\Models\Statu');
+        return  $this->belongsTo('App\Models\Statu','statu_id');
     }
 
     public function juridic(){
@@ -13,7 +16,7 @@ trait AdherentRelationship{
     }
 
     public function activity(){
-        return $this->belongsTo('App\Models\Activity');
+        return $this->belongsTo('App\Models\Activity','activity_id');
     }
 
     public  function region(){
@@ -21,15 +24,15 @@ trait AdherentRelationship{
     }
 
     public function city(){
-        return $this->belongsTo('App\Models\City');
+        return $this->belongsTo('App\Models\City','city_id');
     }
 
     public function country(){
-        return $this->belongsTo('App\Models\Country');
+        return $this->belongsTo('App\Models\Country','country_id');
     }
 
     public function sector(){
-        return  $this->belongsTo('App\Models\Sector');
+        return  $this->belongsTo('App\Models\Sector','sector_id');
     }
 
 }

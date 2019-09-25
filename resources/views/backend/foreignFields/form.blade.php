@@ -1,37 +1,44 @@
 <div class="card">
-    <h4 class="card-header text-uppercase">{{$table}}</h4>
+    <h4 class="card-header text-uppercase">Table <span class="badge badge-info">{{$table}}</span>
+       <div class="float-right">
+           <form  action="{{route("admin.foreign.store")}}" method="post">
+            <div class="input-group">
+            <div class="input-group-prepend">
+                    {{html()->input('submit' )->value('nouveaux')->class('btn btn-success')}}
+            </div>
+                {{html()->input('text','designation')->placeholder('Nouveaux')}}
+                {{html()->input('hidden','table' , $table)}}
+                @csrf
+            </div>
+           </form>
+       </div>
+
+    </h4>
+
     <div class="card-body">
 
-        <form class="row" action="{{route("admin.foreign.store")}}" method="post">
-               <h5 class="col">Nouveau</h5>
-               <div class="col-6">
-                   @csrf
-                   {{html()->input('hidden','table' , $table)}}
-                   {{html()->input('text','designation')->id('designation')->class('form-control')->placeholder('Nouveaux')}}
-               </div>
-            {{html()->input('submit' )->value('nouveaux')->class('btn btn-primary col')}}
-        </form> {{--creating-row--}}
-        <hr>
-        <div class="row">
-            <h5 class="col">list</h5>
-            <div class="col-6">{{html()->select('id' , $data)->class('form-control')->id($table)}}
-            </div>
+        <table class="table table-hover">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">#Id</th>
+                <th scope="col">Désignation</th>
+                <th scope="col">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+@foreach($data as $col)
+        <tr>
+            <td>{{$col->id}}</td>
+            <td>{{$col->designation}}</td>
+            <td>
+                <a class="btn btn-warning" data-toggle="modal" data-target="#rename" data-id="{{$col->id}}" data-field="{{$col->designation}}" href="">Renommer</a>
+                <a class="btn btn-danger" data-toggle="modal" data-target="#confirmDelete" data-id="{{$col->id}}"   href="">supprimer</a>
+            </td>
+        </tr>
+@endforeach
+            </tbody>
+        </table>
 
-
-
-            <a class="btn btn-danger col" data-toggle="modal" data-target="#confirm" data-table="{{$table}}"   href="">supprimer</a>
-        </div> {{--deleting-Row--}}
-        <hr>
-        <form class="row" id="{{$table}}Form" method="post">
-            <h5 class="col">Renommer</h5>
-            <div class="col-6">
-                @csrf
-                {{html()->input('hidden','_method' ,'PUT')}}
-                {{html()->input('hidden','table',$table)}}
-                {{html()->input('text','designation')->id($table.'Input')->class('form-control')->placeholder('renommer la champ')}}
-            </div>
-            {{html()->input('submit' )->value('Renommer')->class('btn btn-success col')}}
-        </form>{{--renaming-Row--}}
     </div> {{--card-body--}}
 </div> {{--card--}}
 

@@ -51,10 +51,56 @@
 
                 <ul class="nav-dropdown-items">
                     <li class="nav-item">
-                        <a class="nav-link {{ active_class(Active::checkUriPattern('admin/log-viewer/logs*')) }}" href="{{ route('admin.adherents.index') }}">
-                            liste des adhérents
+                        <a class="nav-link {{ active_class(Active::checkUriPattern('admin/log-viewer/logs*')) }}" href="{{ route('admin.adherents.create', ['prospect'=>0]) }}">
+                            <i class="fas fa-user-plus"></i> Créer adhérent
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ active_class(Active::checkUriPattern('admin/log-viewer/logs*')) }}" href="{{ route('admin.adherents.index', ['prospect'=>0]) }}">
+                            <i class="fas fa-list"></i> liste des adhérents
+                        </a>
+                    </li>
+                    <div class="nav-dropdown">
+                        <a class="nav-link nav-dropdown-toggle" ><i class="fas fa-user-cog"></i> Configuration</a>
+                        <ul class="nav-dropdown-items">
+                            <li class="nav-item">
+                                <a class="nav-link {{ active_class(Active::checkUriPattern('admin/log-viewer/logs*')) }}" href="{{ route('admin.foreign.index',["table"=>"status"]) }}">
+                                    Status
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {{ active_class(Active::checkUriPattern('admin/log-viewer/logs*')) }}" href="{{ route('admin.foreign.index',["table"=>"juridic_forms"]) }}">
+                                    Formes Juridiques
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {{ active_class(Active::checkUriPattern('admin/log-viewer/logs*')) }}" href="{{ route('admin.foreign.index',["table"=>"regions"]) }}">
+                                    Regions
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {{ active_class(Active::checkUriPattern('admin/log-viewer/logs*')) }}" href="{{ route('admin.foreign.index',["table"=>"cities"]) }}">
+                                    Cités
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {{ active_class(Active::checkUriPattern('admin/log-viewer/logs*')) }}" href="{{ route('admin.foreign.index',["table"=>"countries"]) }}">
+                                    Pays
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {{ active_class(Active::checkUriPattern('admin/log-viewer/logs*')) }}" href="{{ route('admin.foreign.index',["table"=>"sectors"]) }}">
+                                    Secteurs
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {{ active_class(Active::checkUriPattern('admin/log-viewer/logs*')) }}" href="{{ route('admin.foreign.index',["table"=>"activities"]) }}">
+                                    Activitées
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
                 </ul>
             </li>
 
@@ -62,13 +108,18 @@
 
             <li class="nav-item nav-dropdown {{ active_class(Active::checkUriPattern('admin/log-viewer*'), 'open') }}">
                 <a class="nav-link nav-dropdown-toggle {{ active_class(Active::checkUriPattern('admin/log-viewer*')) }}" href="#">
-                    <i class="nav-icon icon-settings"></i> More
+                    <i class="nav-icon icon-settings"></i> Prospect
                 </a>
 
                 <ul class="nav-dropdown-items">
                     <li class="nav-item">
-                        <a class="nav-link {{ active_class(Active::checkUriPattern('admin/log-viewer/logs*')) }}" href="{{ route('admin.foreign.index') }}">
-                            customizing fields
+                        <a class="nav-link {{ active_class(Active::checkUriPattern('admin/log-viewer/logs*')) }}" href="{{ route('admin.adherents.create', ['prospect'=>1]) }}">
+                            <i class="fas fa-user-plus"></i> Créer Prospect
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ active_class(Active::checkUriPattern('admin/log-viewer/logs*')) }}" href="{{ route('admin.adherents.index',["prospect"=>1]) }}">
+                            <i class="fas fa-list"></i> liste des prospectes
                         </a>
                     </li>
                 </ul>
@@ -76,26 +127,43 @@
 
             <li class="divider"></li>
 
-
-
             <li class="nav-item nav-dropdown {{ active_class(Active::checkUriPattern('admin/log-viewer*'), 'open') }}">
                 <a class="nav-link nav-dropdown-toggle {{ active_class(Active::checkUriPattern('admin/log-viewer*')) }}" href="#">
-                    <i class="nav-icon icon-list"></i> @lang('menus.backend.log-viewer.main')
+                    <i class="nav-icon icon-wallet"></i>  Cotisation
                 </a>
 
                 <ul class="nav-dropdown-items">
                     <li class="nav-item">
-                        <a class="nav-link {{ active_class(Active::checkUriPattern('admin/log-viewer')) }}" href="{{ route('log-viewer::dashboard') }}">
-                            @lang('menus.backend.log-viewer.dashboard')
+                        <a class="nav-link {{ active_class(Active::checkUriPattern('admin/log-viewer/logs*')) }}" href="{{ route('admin.cotisation.create') }}">
+                            <i class="fas fa-plus-square"></i> Créer Cotisation
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ active_class(Active::checkUriPattern('admin/log-viewer/logs*')) }}" href="{{ route('log-viewer::logs.list') }}">
-                            @lang('menus.backend.log-viewer.logs')
+                        <a class="nav-link {{ active_class(Active::checkUriPattern('admin/log-viewer/logs*')) }}" href="{{ route('admin.cotisation.index') }}">
+                            <i class="fas fa-list"></i> liste des Cotisations
                         </a>
                     </li>
+                    <div class="nav-dropdown">
+                        <a  class="nav-link nav-dropdown-toggle"><i class="fas fa-cogs"></i> Configuration</a>
+                        <div class="nav-dropdown-items">
+                            <li class="nav-item">
+                                <a class="nav-link {{ active_class(Active::checkUriPattern('admin/log-viewer/logs*')) }}" href="{{ route('admin.foreign.index',["table"=>"montants"]) }}">
+                                    Montants
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {{ active_class(Active::checkUriPattern('admin/log-viewer/logs*')) }}" href="{{ route('admin.foreign.index',["table"=>"paiment_modes"]) }}">
+                                    Paiment modes
+                                </a>
+                            </li>
+                        </div>
+
+                    </div>
                 </ul>
             </li>
+
+            <li class="divider"></li>
+
         </ul>
     </nav>
 

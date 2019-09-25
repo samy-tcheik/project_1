@@ -28,7 +28,7 @@ $factory->define(User::class, function (Generator $faker) {
         'remember_token'    => Str::random(10),
         'confirmation_code' => md5(uniqid(mt_rand(), true)),
         'active' => 1,
-        'confirmed' => 1,
+        'confirmed' => 1
     ];
 });
 

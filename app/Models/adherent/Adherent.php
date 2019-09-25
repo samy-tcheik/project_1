@@ -11,14 +11,16 @@ class Adherent extends Model
 {
     use AdherentRelationship;
     use SoftDeletes ;
+    use AdherentButtons;
+
 
     protected $dates = ['deleted_at'] ;
 
     protected $guarded   = [
         'id',
         'created_at',
-        'updated_at' ,
-        'created_by'
+        'updated_at'
+
     ]  ;
 
 

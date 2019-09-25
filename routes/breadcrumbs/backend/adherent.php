@@ -2,7 +2,7 @@
 
 Breadcrumbs::for('admin.adherents.index', function ($trail) {
     $trail->parent('admin.dashboard');
-    $trail->push('adherents management', url('admin/adherents'));
+    $trail->push('adherents management', url('admin/adherents/0'));
 });
 
 Breadcrumbs::for('admin.adherents.show', function ($trail  , $adherent) {
@@ -22,9 +22,9 @@ Breadcrumbs::for('admin.adherents.edit', function ($trail,$adherent) {
 });
 
 
-Breadcrumbs::for('admin.adherent.archive', function ($trail) {
+Breadcrumbs::for('admin.adherent.trashed', function ($trail) {
     $trail->parent('admin.adherents.index');
-    $trail->push('adherent archive', url('admin/adherentArchive/'));
+    $trail->push('adherent archive', url('admin/adherent/Trash/'));
 });
 /*Breadcrumbs::for('log-viewer::logs.list', function ($trail) {
     $trail->parent('log-viewer::dashboard');

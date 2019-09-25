@@ -54,5 +54,13 @@
       "^.+\\.js$": "<rootDir>/node_modules/babel-jest",
       ".*\\.(vue)$": "<rootDir>/node_modules/jest-vue-preprocessor"
     }
+  },
+  "dependencies": {
+    "chart.js": "^2.8.0",
+    "datatables.net-dt": "^1.10.19",
+    "jquery-ui": "^1.12.1",
+    "jquery-ui-css": "^1.11.5",
+    "jquery-validation": "^1.19.0",
+    "webpack": "^4.40.2"
   }
 }

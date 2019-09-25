@@ -33,28 +33,52 @@
 
                                         <tr>
                                             <th>@lang('labels.frontend.user.profile.name')</th>
-                                            <td>{{$adherent->name}}</td>
+                                            <td >
+                                                <div class="font-xl badge badge-warning">
+                                                    {{$adherent->name}}
+                                                </div>
+                                            </td>
                                         </tr>
 
                                         <tr>
                                             <th>dossier</th>
-                                            <td>{{$adherent->dossier}}</td>
+                                            <td>
+                                                <div class="font-xl badge badge-secondary">
+                                                    {{$adherent->dossier}}
+                                                </div>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <th>juridic form</th>
-                                            <td>{{$adherent->juridic->designation}}</td>
+                                            <td>
+                                                <div class="font-xl badge badge-secondary">
+                                                {{$adherent->juridic->designation}}
+                                                </div>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <th>statu</th>
-                                            <td>{{$adherent->statu->designation}}</td>
+                                            <td>
+                                                <div class="font-xl badge badge-secondary">
+                                                {{$adherent->statu->designation}}
+                                                </div>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <th>regime année civile</th>
-                                            <td>{{$adherent->regime_annee_civile}}</td>
+                                            <td>
+                                                <div  class="font-xl badge badge-secondary" >
+                                                    {{$adherent->regime_annee_civile}}
+                                                </div>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <th>date d'adhesion</th>
-                                            <td>{{$adherent->adhesion_date}}</td>
+                                            <td>
+                                                <div class="font-xl badge badge-secondary">
+                                                    {{$adherent->adhesion_date}}
+                                                </div>
+                                            </td>
                                         </tr>
 
                                         <tr>
@@ -63,28 +87,28 @@
                                         </tr>
                                         <tr>
                                             <th>Telephone 1  </th>
-                                            <td>{{$adherent->tel1}}</td>
+                                            <td><div class="font-xl badge badge-info">{{$adherent->tel1}}</div></td>
                                         </tr>
 
                                         <tr>
                                             <th>Telephone 2 </th>
-                                            <td>{{$adherent->tel2}}</td>
+                                            <td><div class="font-xl badge badge-info">{{$adherent->tel2}}</div></td>
                                         </tr>
                                         <tr>
                                             <th>fax 1  </th>
-                                            <td>{{$adherent->fax1}}</td>
+                                            <td><div class="font-xl badge badge-info">{{$adherent->fax1}}</div></td>
                                         </tr>
                                         <tr>
                                             <th>fax 2 </th>
-                                            <td>{{$adherent->fax2}}</td>
+                                            <td><div class="font-xl badge badge-info">{{$adherent->fax2}}</div></td>
                                         </tr>
                                         <tr>
                                             <th>mobile </th>
-                                            <td>{{$adherent->mobile}}</td>
+                                            <td><div class="font-xl badge badge-info">{{$adherent->mobile}}</div></td>
                                         </tr>
                                         <tr>
                                             <th>site web </th>
-                                            <td>{{$adherent->site_web}}</td>
+                                            <td><div class="font-xl badge badge-info">{{$adherent->site_web}}</div></td>
                                         </tr>
                                         <tr>
                                             <th>boite postal </th>

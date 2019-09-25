@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 
 
-use App\Http\Requests\Backend\DeleteFieldsRequest;
+
 use App\Models\City;
 use App\Models\Statu;
 use App\Models\Region;
@@ -13,9 +13,11 @@ use App\Models\Country;
 use App\Models\Activity;
 use App\Models\Juridic_form;
 use Illuminate\Http\Request;
+use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\StoreFieldsRequest;
+use App\Http\Requests\Backend\DeleteFieldsRequest;
 
 
 class FieldsController extends Controller
@@ -27,32 +29,24 @@ class FieldsController extends Controller
 
      */
 
-    public function index()
+    public function index(Request $request)
     {
-        return view('backend.foreignFields.index' , $this->relativeData());
+        $table = DB::table($request->get("table"))->get();
+        return view('backend.foreignFields.index' ,["data"=>$table,"table"=>$request->get("table")]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
 
 
     private function relativeData(){
         return [
-            'juridics'  =>   Juridic_form::all()->pluck('designation','id'),
-            'status'    =>   Statu::all()->pluck('designation','id'),
-            'regions'   =>   Region::all()->pluck('designation', 'id'),
-            "cities"    =>   City::all()->pluck('designation','id'),
-            'countries' =>   Country::all()->pluck('designation','id'),
-            'sectors'   =>   Sector::all()->pluck('designation','id'),
-            'activity'  =>   Activity::all()->pluck('designation','id')
+            'juridics'  =>   Juridic_form::all('designation','id'),
+            'status'    =>   Statu::all('designation','id'),
+            'regions'   =>   Region::all('designation','id'),
+            "cities"    =>   City::all('designation','id'),
+            'countries' =>   Country::all('designation','id'),
+            'sectors'   =>   Sector::all('designation','id'),
+            'activity'  =>   Activity::all('designation','id')
         ];
     }
 
@@ -62,38 +56,19 @@ class FieldsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreFieldsRequest $request)
+    public function store(Request $request)
     {
+        $table = $request['table'];
         try{
-            DB::table($request['table'])->insert(['designation' =>$request['designation']]);
+            DB::table($table)->insert(['designation' =>$request['designation']]);
         }
-        catch (Exception $e){
+        catch (QueryException $e){
+            return redirect()->back()->withFlashDanger('erreur produit ...');
+        }
 
-        }
         return redirect()->back()->withFlashSuccess('successfully inserted');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -104,12 +79,14 @@ class FieldsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $table = $table = $request['table'];
         try{
-          \DB::table($request['table'])->where('id',$id)->update(['designation'=>$request['designation']]);
+            DB::table($table)->where('id',$id)->update(['designation'=>$request['designation']]);
         }
         catch (Exception $e){
-
+            return redirect()->back()->withFlashDanger('erreur produit ...');
         }
+
         return redirect()->back()->withFlashSuccess('successfully updated');
     }
 
@@ -119,14 +96,19 @@ class FieldsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(DeleteFieldsRequest $request , $id)
+    public function destroy(Request $request , $id)
     {
         try{
-            \DB::table($request['table'])->delete($id);
+            DB::table($request['table'])->delete($id);
 
+        }
+        catch (QueryException $e){
+
+            return redirect()->back()->withFlashDanger('vous ne pouvez pas supprimer champs utilisé  !!!');
         }
         catch (Exception $e){
 
+            return redirect()->back()->withFlashDanger('erreur produit ...');
         }
         return redirect()->back()->withFlashSuccess('successfully deleted');
     }

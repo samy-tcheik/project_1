@@ -15,7 +15,7 @@ class AdherentObserver
      * @return void
      */
     public function creating(Adherent $adherent){
-        $adherent->created_by = Auth::id();
+        !is_null(Auth::id())  ? $adherent->created_by = Auth::id() : $adherent->created_by = 0;
     }
 
     /**

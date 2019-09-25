@@ -11,3 +11,5 @@ Breadcrumbs::for('admin.foreign.index', function ($trail) {
 require __DIR__.'/auth.php';
 require __DIR__.'/log-viewer.php';
 require  __DIR__.'/adherent.php' ;
+require  __DIR__.'/prospect.php' ;
+require __DIR__."/cotisation.php";

@@ -22,8 +22,25 @@ class DatabaseSeeder extends Seeder
             'sessions',
         ]);
 
-        $this->call(AuthTableSeeder::class);
+        $this->call([
+            AuthTableSeeder::class,
+            CitySeeder::class,
+            CountrySeeder::class,
+            juridicSeeder::class,
+            MontantSeeder::class,
+            RegionSeeder::class,
+            SectorSeeder::class,
+            StatusSeeder::class,
+            ActivitySeeder::class,
+            PaimentModeSeeder::class
+
+        ]);
+
+
+
+
 
         Model::reguard();
+
     }
 }

@@ -9,10 +9,15 @@
                 <div class="card-header">
                     <strong>@lang('strings.backend.dashboard.welcome') {{ $logged_in_user->name }}!</strong>
                 </div><!--card-header-->
-                <div class="card-body">
-                    {!! __('strings.backend.welcome') !!}
+                <div class="row card-body">
+                    <div class="col-6">
+                    {!! $bar->container() !!}
+                    </div>
                 </div><!--card-body-->
             </div><!--card-->
         </div><!--col-->
     </div><!--row-->
 @endsection
+@push('myscript')
+    {!! $bar->script() !!}
+    @endpush

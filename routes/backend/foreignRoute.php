@@ -1,3 +1,4 @@
 <?php
 
-Route::resource('/foreign' , 'FieldsController')->only('index', 'store' ,'update', 'destroy');
+Route::resource('/foreign' , 'FieldsController')->only( 'index','store' ,'update', 'destroy');
+

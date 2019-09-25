@@ -1,38 +1,38 @@
 
 {{--companyIinfo--}}
 <div class="col-sm-4">
-    <h5 class="card-title">Company info</h5>
+    <h5 class="card-title"> Company info</h5>
     <hr>
     <div class="form-group row">
         <label for="tel1" class="col-sm-4 col-form-label">telephone 1</label>
         <div class="col-sm-6">
-            {{html()->text('tel1')->class('form-control')}}
+            {{html()->text('tel1')->class('form-control')->attribute("minlength",10)->attribute("required")}}
         </div>
     </div><!-- telephon1 +-->
     <div class="form-group row">
         <label for="tel2" class="col-sm-4 col-form-label">telephone 2</label>
         <div class="col-sm-6">
-            {{html()->text('tel2')->class('form-control')}}
+            {{html()->text('tel2')->class('form-control')->attribute("minlength",10)}}
         </div>
     </div><!-- telephon2 +-->
     <div class="form-group row">
         <label for="fax1" class="col-sm-4 col-form-label">fax 1</label>
         <div class="col-sm-6">
 
-            {{html()->text('fax1')->class('form-control')->placeholder('fax 1 ')}}
+            {{html()->text('fax1')->class('form-control')->placeholder('fax 1 ')->attribute("minlength",10)}}
         </div>
     </div><!-- fax 1+ -->
     <div class="form-group row">
         <label for="fax2" class="col-sm-4 col-form-label">fax 2</label>
         <div class="col-sm-6">
-            {{html()->text('fax2')->class('form-control')->placeholder('fax 2  ')}}
+            {{html()->text('fax2')->class('form-control')->placeholder('fax 2  ')->attribute("minlength",10)}}
         </div>
     </div><!-- fax 2+ -->
     <div class="form-group row">
         <label for="mobile" class="col-sm-4 col-form-label">mobile</label>
         <div class="col-sm-6">
 
-            {{html()->text('mobile')->class('form-control')->placeholder('mobile ')}}
+            {{html()->text('mobile')->class('form-control')->placeholder('mobile ')->attribute("minlength",10)}}
         </div>
     </div><!-- mobile+ -->
     <div class="form-group row">
@@ -46,13 +46,13 @@
         <label for="web" class="col-sm-4 col-form-label">site web</label>
         <div class="col-sm-6">
 
-            {{html()->text('site_web' )->class('form-control')->placeholder('site web ')}}
+            {{html()->text('site_web' )->class('form-control')->placeholder('site web ')->attribute('type',"url")}}
         </div>
     </div><!--web+-->
     <div class="form-group row">
         <label for="postal" class="col-sm-4 col-form-label">boite  postal</label>
         <div class="col-sm-6">
-            {{html()->text('boite_postal')->class('form-control')->placeholder('boite postal')}}
+            {{html()->text('boite_postal')->class('form-control')->placeholder('boite postal')->attribute('type',"number")}}
         </div>
     </div><!--boite postal+-->
     <div class="form-group row">
@@ -79,7 +79,7 @@
     <div class="form-group row">
         <label for="codep" class="col-sm-4 col-form-label">code postal</label>
         <div class="col-sm-6">
-            {{html()->text('code_postal')->class('form-control')->placeholder('code postal')}}
+            {{html()->text('code_postal')->class('form-control')->placeholder('code postal')->attribute('type',"number")}}
         </div>
     </div><!-- code postal+ -->
 </div>
@@ -116,7 +116,7 @@
         <label for="effectif" class="col-sm-4 col-form-label">effectif</label>
         <div class="col-sm-6">
 
-            {{html()->text('effectif')->class('form-control')->placeholder('effectif')}}
+            {{html()->text('effectif')->class('form-control')->placeholder('effectif')->attribute('type',"number")}}
         </div>
     </div>{{--effectif--}}
     <hr>
@@ -124,8 +124,7 @@
     <div class="form-group row">
         <label for="code" class="col-sm-4 col-form-label">ca</label>
         <div class="col-sm-6">
-
-            {{html()->text('ca')->class('form-control')->placeholder('ca')}}
+            {{html()->text('ca')->class('form-control')->placeholder('ca')->attribute('type',"number")}}
         </div>
     </div>{{--ca--}}
     <div class="form-group row">
@@ -135,8 +134,7 @@
     <div class="form-group row">
         <label for="code" class="col-sm-4 col-form-label">cs</label>
         <div class="col-sm-6">
-
-            {{html()->text('cs')->class('form-control')->placeholder('cs')}}
+            {{html()->text('cs')->class('form-control')->placeholder('cs')->attribute('type',"number")}}
         </div>
     </div>{{--cs--}}
     <div class="form-group row">
@@ -163,16 +161,18 @@
 
         <label for="name" class="col-sm-4 col-form-label">name</label>
         <div class="col-sm-6">
-            {{ html()->text('name')->class('form-control')->placeholder('name') }}
+            {{ html()->text('name')->class('form-control')->placeholder('name')->attribute('required') }}
         </div>
     </div><!-- nom+  -->
-    <div class="form-group row">
+    <div class="form-group row" id="dossier_html">
         <label for="dossier" class="col-sm-4 col-form-label">dossier</label>
         <div class="col-sm-6">
-            {{html()->text('dossier')->class('form-control')->placeholder('dossier')}}
+            {{html()->text('dossier')->class('form-control')->id('dossier')->placeholder('dossier')->attribute('required')}}
+            {{html()->div()->id('dossierSuggestion')}}
         </div>
+
     </div><!-- dossier+ -->
-    <div class="form-group row">
+    <div class="form-group row" >
         <label for="juridic" class="col-sm-4">juridic form</label>
         {{html()->select('juridic_form_id' ,$juridics  )->class('form-control col-sm-6  custom-select')}}
 
@@ -191,12 +191,20 @@
     </div><!-- regime anné civile+ -->
     <div class="form-group row">
         <label for="desc" class="col-sm-4">description</label>
-        {{html()->textarea('description')->class('form-control col-sm-6')}}
+        {{html()->textarea('description')->class('form-control col-sm-6')->attribute('required')}}
 
 
 
     </div>{{--description+--}}
 
 </div>
+<style>
+    label.error{
+        color: #ff3c35;
+        font-style: italic;
+
+    }
+</style>
+
 
 

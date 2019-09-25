@@ -34,6 +34,7 @@ class StoreFieldsRequest extends FormRequest
                 'countries',
                 'cities',
                 'activities'
+
                 )
         ]];
     }
