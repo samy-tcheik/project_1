@@ -5,6 +5,7 @@ namespace App\Models\Auth\Traits\Relationship;
 use App\Models\System\Session;
 use App\Models\Auth\SocialAccount;
 use App\Models\Auth\PasswordHistory;
+use App\Models\Event\EventType;
 
 /**
  * Class UserRelationship.
@@ -33,5 +34,10 @@ trait UserRelationship
     public function passwordHistories()
     {
         return $this->hasMany(PasswordHistory::class);
+    }
+    
+    public function eventTypes()
+    {
+        return $this->hasMany(EventType::class,'created_by');
     }
 }

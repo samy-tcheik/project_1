@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use App\Models\adherent\Adherent;
 use App\Models\Auth\User;
+use App\Models\Event\EventType;
+use App\Observers\TypeObserver;
 use App\Observers\AdherentObserver;
 use App\Observers\User\UserObserver;
 use Illuminate\Support\ServiceProvider;
@@ -22,6 +24,7 @@ class ObserverServiceProvider extends ServiceProvider
     {
         User::observe(UserObserver::class);
         Adherent::observe(AdherentObserver::class);
+        EventType::observe(TypeObserver::class);
     }
 
     /**

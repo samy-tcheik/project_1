@@ -32,7 +32,8 @@ class DatabaseSeeder extends Seeder
             SectorSeeder::class,
             StatusSeeder::class,
             ActivitySeeder::class,
-            PaimentModeSeeder::class
+            PaimentModeSeeder::class,
+            TypeTableSeeder::class
 
         ]);
 

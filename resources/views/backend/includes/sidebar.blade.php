@@ -103,7 +103,31 @@
 
                 </ul>
             </li>
+            <li class="nav-item nav-dropdown {{ active_class(Active::checkUriPattern('admin/log-viewer*'), 'open') }}">
+                <a class="nav-link nav-dropdown-toggle {{ active_class(Active::checkUriPattern('admin/log-viewer*')) }}" href="#">
+                    <i class="nav-icon icon-map"></i> Eventments
+                </a>
 
+                <ul class="nav-dropdown-items">
+                    <li class="nav-item">
+                    <a class="nav-link {{ active_class(Active::checkUriPattern('admin/log-viewer/logs*')) }}" href="{{ route('admin.type.index')}}">
+                         Type d'évenements
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                    <a class="nav-link {{ active_class(Active::checkUriPattern('admin/log-viewer/logs*'))}}" href=" {{ route('admin.event.index') }}">
+                        Evenements
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link {{ active_class(Active::checkUriPattern('admin/log-viewer/logs*'))}}" href="#">
+                        Historique
+                        </a>
+                    </li>
+                </ul>
+            </li>
             <!--   -->
 
             <li class="nav-item nav-dropdown {{ active_class(Active::checkUriPattern('admin/log-viewer*'), 'open') }}">
