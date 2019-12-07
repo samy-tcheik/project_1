@@ -8,7 +8,7 @@
         <div class="row">
             <div class="col-sm-5">
                 <h4 class="card-title mb-0">
-                    Gestion des types d'évènements
+                    Gestion des Evènements
                 </h4>
             </div>
             <div class="col-sm-7">
@@ -34,25 +34,9 @@
                                 <th>Responsable</th>
                                 <th>Presences</th>
                                 <th>Payments</th>
-                                <th>Action</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
-                        <tbody>
-                                <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                </tr>                
-                            <!--modal-->
-                            
-                        </tbody>
                     </table>
                 </div>
             </div>
@@ -63,7 +47,56 @@
 @push('myscript')
 <script>
 $(document).ready( function(){
-    $('#table').DataTable();
+    $('#table').DataTable({
+        "processing": true,
+        "serverSide": true,
+        "ajax": "{{route('admin.event.ajaxdt')}}",
+        "columns":[
+            {"data": "theme"},
+            {"data": null},
+            {"data": "date_debut"},
+            {"data": "date_fin"},
+            {"data": "inscrits"},
+            {"data": "lieu"},
+            {"data": "responsable"},
+            {"data": null},
+            {"data": null},
+            {"data": "action"}
+        ]
+    });
+    $('#table').on('click','.delete_event',function() {
+        var id = $(this).data('id');
+            swal({
+            title: "Attention",
+            text: "Veuillez confirmer la suppression",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Confirmer",
+            cancelButtonText: "Annuler",
+            }).then((result) => {
+                if (result.value) {
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+                    $.ajax({
+                        url: "/admin/evenment/event/"+id,
+                        type: "DELETE",
+                        data: {_method:'DELETE' },
+                        success: function ()
+                        {
+                            swal("Supprimé!", "Le type d'évenment a bien etait supprimé!", "success");
+                            $('#table').DataTable().ajax.reload();
+                        },
+                        error: function() {
+                            swal("Erreur","L'évenment n'a pas pu etre supprimé!", "error")
+                        }
+                        
+                    });
+                }
+            })
+    })
 });
 </script>
 @endpush

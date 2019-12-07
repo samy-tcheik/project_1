@@ -17637,38 +17637,6 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! DataTables 1
 
 /***/ }),
 
-/***/ "./node_modules/is-buffer/index.js":
-/*!*****************************************!*\
-  !*** ./node_modules/is-buffer/index.js ***!
-  \*****************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-/*!
- * Determine if an object is a Buffer
- *
- * @author   Feross Aboukhadijeh <https://feross.org>
- * @license  MIT
- */
-
-// The _isBuffer check is for Safari 5-7 support, because it's missing
-// Object.prototype.constructor. Remove this eventually
-module.exports = function (obj) {
-  return obj != null && (isBuffer(obj) || isSlowBuffer(obj) || !!obj._isBuffer)
-}
-
-function isBuffer (obj) {
-  return !!obj.constructor && typeof obj.constructor.isBuffer === 'function' && obj.constructor.isBuffer(obj)
-}
-
-// For Node v0.10 support. Remove this eventually.
-function isSlowBuffer (obj) {
-  return typeof obj.readFloatLE === 'function' && typeof obj.slice === 'function' && isBuffer(obj.slice(0, 0))
-}
-
-
-/***/ }),
-
 /***/ "./node_modules/pace/pace.js":
 /*!***********************************!*\
   !*** ./node_modules/pace/pace.js ***!
@@ -22812,8 +22780,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery_validation_dist_jquery_validate_min__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(jquery_validation_dist_jquery_validate_min__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var datatables_net_dt_js_dataTables_dataTables_min__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! datatables.net-dt/js/dataTables.dataTables.min */ "./node_modules/datatables.net-dt/js/dataTables.dataTables.min.js");
 /* harmony import */ var datatables_net_dt_js_dataTables_dataTables_min__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(datatables_net_dt_js_dataTables_dataTables_min__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var chart_js_dist_Chart_bundle_min__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! chart.js/dist/Chart.bundle.min */ "./node_modules/chart.js/dist/Chart.bundle.min.js");
-/* harmony import */ var chart_js_dist_Chart_bundle_min__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(chart_js_dist_Chart_bundle_min__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var jquery_ui_ui_widgets_tabs_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! jquery-ui/ui/widgets/tabs.js */ "./node_modules/jquery-ui/ui/widgets/tabs.js");
+/* harmony import */ var jquery_ui_ui_widgets_tabs_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(jquery_ui_ui_widgets_tabs_js__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var bootstrap4_tagsinput_umd_tagsinput__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! bootstrap4-tagsinput-umd/tagsinput */ "./node_modules/bootstrap4-tagsinput-umd/tagsinput.js");
+/* harmony import */ var bootstrap4_tagsinput_umd_tagsinput__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(bootstrap4_tagsinput_umd_tagsinput__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var bootstrap4_toggle_js_bootstrap4_toggle_min__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! bootstrap4-toggle/js/bootstrap4-toggle.min */ "./node_modules/bootstrap4-toggle/js/bootstrap4-toggle.min.js");
+/* harmony import */ var bootstrap4_toggle_js_bootstrap4_toggle_min__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(bootstrap4_toggle_js_bootstrap4_toggle_min__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var chart_js_dist_Chart_bundle_min__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! chart.js/dist/Chart.bundle.min */ "./node_modules/chart.js/dist/Chart.bundle.min.js");
+/* harmony import */ var chart_js_dist_Chart_bundle_min__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(chart_js_dist_Chart_bundle_min__WEBPACK_IMPORTED_MODULE_7__);
+
+
+
 
 
 
@@ -23040,9 +23017,9 @@ $(function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/vagrant/work/ccstage/resources/js/backend/before.js */"./resources/js/backend/before.js");
-__webpack_require__(/*! /home/vagrant/work/ccstage/resources/js/backend/app.js */"./resources/js/backend/app.js");
-module.exports = __webpack_require__(/*! /home/vagrant/work/ccstage/resources/js/backend/after.js */"./resources/js/backend/after.js");
+__webpack_require__(/*! /home/vagrant/messites/Ccstage/resources/js/backend/before.js */"./resources/js/backend/before.js");
+__webpack_require__(/*! /home/vagrant/messites/Ccstage/resources/js/backend/app.js */"./resources/js/backend/app.js");
+module.exports = __webpack_require__(/*! /home/vagrant/messites/Ccstage/resources/js/backend/after.js */"./resources/js/backend/after.js");
 
 
 /***/ })

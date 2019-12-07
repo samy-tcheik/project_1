@@ -28,38 +28,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/is-buffer/index.js":
-/*!*****************************************!*\
-  !*** ./node_modules/is-buffer/index.js ***!
-  \*****************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-/*!
- * Determine if an object is a Buffer
- *
- * @author   Feross Aboukhadijeh <https://feross.org>
- * @license  MIT
- */
-
-// The _isBuffer check is for Safari 5-7 support, because it's missing
-// Object.prototype.constructor. Remove this eventually
-module.exports = function (obj) {
-  return obj != null && (isBuffer(obj) || isSlowBuffer(obj) || !!obj._isBuffer)
-}
-
-function isBuffer (obj) {
-  return !!obj.constructor && typeof obj.constructor.isBuffer === 'function' && obj.constructor.isBuffer(obj)
-}
-
-// For Node v0.10 support. Remove this eventually.
-function isSlowBuffer (obj) {
-  return typeof obj.readFloatLE === 'function' && typeof obj.slice === 'function' && isBuffer(obj.slice(0, 0))
-}
-
-
-/***/ }),
-
 /***/ "./node_modules/popper.js/dist/esm/popper.js":
 /*!***************************************************!*\
   !*** ./node_modules/popper.js/dist/esm/popper.js ***!
@@ -14738,9 +14706,9 @@ $(function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/vagrant/work/ccstage/resources/js/frontend/app.js */"./resources/js/frontend/app.js");
-__webpack_require__(/*! /home/vagrant/work/ccstage/resources/sass/frontend/app.scss */"./resources/sass/frontend/app.scss");
-module.exports = __webpack_require__(/*! /home/vagrant/work/ccstage/resources/sass/backend/app.scss */"./resources/sass/backend/app.scss");
+__webpack_require__(/*! /home/vagrant/messites/Ccstage/resources/js/frontend/app.js */"./resources/js/frontend/app.js");
+__webpack_require__(/*! /home/vagrant/messites/Ccstage/resources/sass/frontend/app.scss */"./resources/sass/frontend/app.scss");
+module.exports = __webpack_require__(/*! /home/vagrant/messites/Ccstage/resources/sass/backend/app.scss */"./resources/sass/backend/app.scss");
 
 
 /***/ })

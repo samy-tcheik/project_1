@@ -25,16 +25,14 @@ class CreateEventsTable extends Migration
             $table->string('lien')->nullable();
             $table->longText('description')->nullable();
             $table->longText('observation')->nullable();
-            $table->unsignedInteger('montant')->nullable();
-            $table->foreign('montant')->references('id')->on('montants');
-            $table->unsignedInteger('paiment')->nullable();
-            $table->foreign('paiment')->references('id')->on('paiment_modes');
-            $table->unsignedInteger('type')->nullable();
+            $table->unsignedInteger('paiment_modes_id')->default(1);
+            $table->foreign('paiment_modes_id')->references('id')->on('paiment_modes');
+            $table->unsignedInteger('type');
             $table->foreign('type')->references('id')->on('event_types')
-            ->onDelete('restrict')
-            ->onUpdate('restrict');
-            $table->unsignedInteger('responsable')->nullable();
-            $table->foreign('responsable')->references('id')->on('users')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
+            $table->unsignedInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')
             ->onDelete('restrict')
             ->onUpdate('restrict');
             $table->timestamps();

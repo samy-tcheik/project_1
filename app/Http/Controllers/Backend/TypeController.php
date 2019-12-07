@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Event\EventType;
+use Yajra\DataTables\Facades\DataTables;
 
 class TypeController extends Controller
 {
@@ -15,8 +16,7 @@ class TypeController extends Controller
      */
     public function index()
     {
-        $types = EventType::all();
-        return view('backend.eventType.index', compact('types'));
+        return view('backend.eventType.index');
     }
 
     /**
@@ -96,11 +96,18 @@ class TypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($type)
+    public function destroy($id)
     {
-        $type = EventType::find($type)->first();
+        $type = EventType::find($id);
         $type->delete();
+    }
 
-        return redirect()->to(route('admin.type.index'))->withFlashSucces('Le Type A Bien Etait Supprimé');
+    public function ajaxDatatable(){
+        $type = EventType::Select('id','type','prefix','created_at','created_by');
+        return DataTables::of($type)
+        ->addColumn('action',function($type){
+            $route = route('admin.type.edit',$type->id);
+            return '<a href="'.$route.'" class="btn btn-primary btn"><i class="fas fa-cog"></i></a><button class="btn btn-danger delete_type" data-id="'.$type->id.'"><i class="fas fa-trash"></i></button>';
+        })->make(true);
     }
 }

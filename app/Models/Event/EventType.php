@@ -12,6 +12,10 @@ class EventType extends Model
         return $this->belongsTo(User::class, 'created_by', 'id');
     }
 
+    public function event_type(){
+        return $this->hasMany(Event::class,'type');
+    }
+
     protected $fillable = [
         'type',
         'prefix',

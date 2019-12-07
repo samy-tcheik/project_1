@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-sm-5">
                     <h4 class="card-title mb-0">
-                        Gestion des Evènement
+                        Gestion des Types D'évènement
                     </h4>
                 </div>
                 <div class="col-sm-7">
@@ -31,39 +31,6 @@
                                     <th>Action</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                @foreach ($types as $type)
-                                    <tr>
-                                    <td>{{ $type->type }}</td>
-                                    <td>{{ $type->prefix}}</td>
-                                    <td></td>
-                                    <td>{{ $type->created_at->format('Y-m-d')}}</td>
-                                    <td>{{ $type->creator->first_name}}</td>
-                                    <td><a href="{{ route('admin.type.edit',$type->id)}}" class="btn btn-primary">Modifier</a>
-                                        <button type="button" data-toggle="modal" data-target="#confirmationModal" class="btn btn-danger">Supprimer</button>
-                                        @csrf
-                                    </td>
-                                    </tr>                
-                                @endforeach
-                                <!--modal-->
-                                <div class="modal fade" id="confirmationModal" role="dialog" >
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title">Voulez vous vraiment suprimer ce type d'évènements ?</h5>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button class="btn btn-primary" data-dismiss="modal">Annuler</button>
-                                            <form action="{{ route('admin.type.destroy',$type->id)}}" method="POST">
-                                            @method('DELETE')
-                                            @csrf
-                                            <button type="submit" class="btn btn-danger">Confirmer</button>
-                                            </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -75,7 +42,76 @@
 @push('myscript')
 <script>
 $(document).ready( function(){
-    $('#table').DataTable();
+    $('#table').DataTable({
+        "processing": true,
+        "serverSide": true,
+        "ajax": "{{route('admin.type.ajaxdt')}}",
+        "columns":[
+            {"data": "type"},
+            {"data": "prefix"},
+            {"data": null},
+            {"data": "created_at"},
+            {"data": "created_by"},
+            {"data": "action"},
+        ]
+    })
+    $('#table').on('click','.delete_type',function(){
+        var id = $(this).data('id');
+            swal({
+            title: "Attention",
+            text: "Veuillez confirmer la suppression",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Confirmer",
+            cancelButtonText: "Annuler",
+            }).then((result) => {
+                if (result.value) {
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+                    $.ajax({
+                        url: "/admin/evenment/type/"+id,
+                        type: "DELETE",
+                        data: {_method:'DELETE' },
+                        success: function ()
+                        {
+                            swal("Supprimé!", "Le type d'évènment a bien etait supprimé", "success");
+                            $('#table').DataTable().ajax.reload();
+                        },
+                        error: function() {
+                            swal("Erreur","Le type d'évènment n'a pas pu etre supprimé!", "error")
+                        }
+                    });
+                }
+            })
+    });
 });
+
+/*$(".delete_type").click( function (e) {
+            e.preventDefault();
+            var _this = $(this)
+
+            console.info(_this.parent().prop('action'))
+            swal({
+            title: "Attention",
+            text: "Veuillez confirmer la suppression",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Confirmer",
+            cancelButtonText: "Annuler",
+            }, function(result) {
+                if(result) {
+                    _this.parent().submit();
+                } else {
+                    swal('cancelled');
+                }
+            });
+        
+           
+});*/
+
+ 
 </script>
 @endpush

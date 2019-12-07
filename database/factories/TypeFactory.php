@@ -5,11 +5,13 @@ use Faker\Generator as Faker;
 use Illuminate\Support\Str;
 
 $factory->define(EventType::class, function (Faker $faker){
-    $users = User::all("id")->pluck("id");
+    $users = User::get()->pluck("id")->toArray();
+    $user = Auth::loginUsingId($faker->randomElement($users));
+   // dd($users, $faker->randomElement($users));
 
     return [
         "type"=>$faker->name,
         "prefix"=>Str::random(5),
-        "created_by"=>$faker->randomElement($users)
+        "created_by"=>$user->id
     ];
 });
