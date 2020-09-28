@@ -17,14 +17,15 @@ class CreatePayeursTable extends Migration
             $table->increments('id');
             $table->string('prenom_payeur');
             $table->string('nom_payeur');
-            $table->string('mobile_payeur');
+            $table->string('mobile_payeur')->nullable();
             $table->integer('telephone');
-            $table->longText('observation');
-            $table->text('adresse');
-            $table->unsignedInteger('event_id');
-            $table->foreign('event_id')->references('id')->on('events');
+            $table->longText('observation')->nullable();
+            $table->text('adresse')->nullable();
             $table->unsignedInteger('adherent_id');
             $table->foreign('adherent_id')->references('id')->on('adherents');
+            $table->unsignedInteger('event_id');
+            $table->foreign('event_id')->references('id')->on('events')
+            ->onDelete('cascade');
             $table->timestamps();
         });
     }

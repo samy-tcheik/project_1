@@ -18,18 +18,23 @@ class CreateParticipantsTable extends Migration
             $table->increments('id');
             $table->string('prenom_participant');
             $table->string('nom_participant');
-            $table->string('mobile_participant');
-            $table->string('fonction');
+            $table->string('mobile_participant')->nullable();
+            $table->string('fonction')->nullable();
             $table->string('email');
             $table->boolean('presence')->default(false);
             $table->unsignedInteger('montant_id')->nullable();
-            $table->foreign('montant_id')->references('id')->on('montants');
+            $table->foreign('montant_id')->references('id')->on('event_montants');
             $table->unsignedInteger('paiment_mode_id')->default(1);
             $table->foreign('paiment_mode_id')->references('id')->on('paiment_modes');
             $table->unsignedInteger('event_id');
-            $table->foreign('event_id')->references('id')->on('events');
+            $table->foreign('event_id')->references('id')->on('events')
+            ->onDelete('restrict')->onUpdate('restrict');
             $table->unsignedInteger('adherent_id');
             $table->foreign('adherent_id')->references('id')->on('adherents');
+            $table->unsignedInteger('payeur_id')->nullable();
+            $table->foreign('payeur_id')->references('id')->on('payeurs')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
             $table->timestamps();
         });
     }

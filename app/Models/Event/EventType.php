@@ -12,7 +12,7 @@ class EventType extends Model
         return $this->belongsTo(User::class, 'created_by', 'id');
     }
 
-    public function event_type(){
+    public function event(){
         return $this->hasMany(Event::class,'type');
     }
 

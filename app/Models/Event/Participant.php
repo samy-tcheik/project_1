@@ -10,20 +10,29 @@ use App\Models\Event\Event;
 
 class Participant extends Model
 {
-    public function eventMontant () {
-        return $this->hasMany(Event_montants::class,'montant_id','id');
+    public function eventMontant()
+    {
+        return $this->hasMany(Event_montants::class,'id','montant_id');
     }
-    public function participantPaimentmode () 
+
+    public function participantPaimentmode() 
     {
         return $this->hasOne(Paiment_mode::class,'paiment_mode_id','id');
     }
+
     public function participantEvent()
     {
         return $this->belongsTo(Event::class,'event_id','id');
     }
-    public function participantAdherent()
+
+    public function adherent()
     {
         return $this->belongsTo(Adherent::class,'adherent_id','id');
+    }
+
+    public function payeur()
+    {
+        return $this->belongsTo(Payeur::class,'payeur_id');
     }
 
 
@@ -33,6 +42,7 @@ class Participant extends Model
         'mobile_participant',
         'fonction',
         'email',
+        'montant_id',
         'event_id',
         'adherent_id',
         'paiment',

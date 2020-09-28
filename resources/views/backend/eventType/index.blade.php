@@ -13,7 +13,7 @@
                 </div>
                 <div class="col-sm-7">
                     <div class="btn-toolbar float-right" role="toolbar">
-                    <a href="{{ route('admin.type.create')}}" class="btn-lg btn-success ml-1"><i class="fas fa-plus-circle"></i></a>
+                        <a href="{{ route('admin.type.create')}}" class="btn-lg btn-success ml-1"><i class="fas fa-plus-circle"></i></a>
                     </div>
                 </div>
             </div> <!--row-->
@@ -49,7 +49,7 @@ $(document).ready( function(){
         "columns":[
             {"data": "type"},
             {"data": "prefix"},
-            {"data": null},
+            {"data": "event"},
             {"data": "created_at"},
             {"data": "created_by"},
             {"data": "action"},
@@ -88,30 +88,5 @@ $(document).ready( function(){
             })
     });
 });
-
-/*$(".delete_type").click( function (e) {
-            e.preventDefault();
-            var _this = $(this)
-
-            console.info(_this.parent().prop('action'))
-            swal({
-            title: "Attention",
-            text: "Veuillez confirmer la suppression",
-            type: "warning",
-            showCancelButton: true,
-            confirmButtonText: "Confirmer",
-            cancelButtonText: "Annuler",
-            }, function(result) {
-                if(result) {
-                    _this.parent().submit();
-                } else {
-                    swal('cancelled');
-                }
-            });
-        
-           
-});*/
-
- 
 </script>
 @endpush

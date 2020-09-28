@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Event\Event;
 use App\Models\Event\EventType;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -108,6 +109,13 @@ class TypeController extends Controller
         ->addColumn('action',function($type){
             $route = route('admin.type.edit',$type->id);
             return '<a href="'.$route.'" class="btn btn-primary btn"><i class="fas fa-cog"></i></a><button class="btn btn-danger delete_type" data-id="'.$type->id.'"><i class="fas fa-trash"></i></button>';
+        })
+        ->addColumn('created_by',function($type){
+            return ''.$type->creator->first_name.'';
+        })
+        ->addColumn('event',function($type){
+            $event_count = Event::where('type',$type->id);
+            return ''.$event_count->count().'';
         })->make(true);
     }
 }

@@ -120,12 +120,6 @@
                         Evenements
                         </a>
                     </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link {{ active_class(Active::checkUriPattern('admin/log-viewer/logs*'))}}" href="#">
-                        Historique
-                        </a>
-                    </li>
                 </ul>
             </li>
             <!--   -->

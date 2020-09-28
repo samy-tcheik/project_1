@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEventMontantsTable extends Migration
+class CreateDepensesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,13 @@ class CreateEventMontantsTable extends Migration
      */
     public function up()
     {
-        Schema::create('event_montants', function (Blueprint $table) {
+        Schema::create('depenses', function (Blueprint $table) {
             $table->increments('id');
-            $table->bigInteger('designation')->nullable();
-            $table->unsignedInteger('event_id')->nullable();
-            $table->foreign('event_id')->references('id')->on('events');
+            $table->bigInteger('designation');
+            $table->unsignedInteger('event_id');
+            $table->foreign('event_id')->references('id')->on('events')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
             $table->timestamps();
         });
     }
@@ -29,6 +31,6 @@ class CreateEventMontantsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('event_montants');
+        Schema::dropIfExists('depenses');
     }
 }

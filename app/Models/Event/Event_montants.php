@@ -12,6 +12,7 @@ class Event_montants extends Model
     }
 
     protected $fillable = [
-        'designation'
+        'designation',
+        'event_id'
     ];
 }

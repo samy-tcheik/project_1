@@ -30,6 +30,11 @@ class Event extends Model
         return $this->hasMany(Participant::class,'event_id');
     }
 
+    public function payeur()
+    {
+        return $this->hasMany(Payeur::class,'event_id');
+    }
+
     public function montant()
     {
         return $this->hasMany(Event_montants::class,'event_id');

@@ -56,13 +56,13 @@
     }
   },
   "dependencies": {
-    "bootstrap4-tagsinput-umd": "^1.0.2",
     "bootstrap4-toggle": "^3.6.1",
     "chart.js": "^2.8.0",
     "datatables.net-dt": "^1.10.19",
     "jquery-ui": "^1.12.1",
     "jquery-ui-css": "^1.11.5",
     "jquery-validation": "^1.19.0",
+    "select2": "^4.0.12",
     "webpack": "^4.40.2"
   }
 }

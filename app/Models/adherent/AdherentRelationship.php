@@ -1,6 +1,8 @@
 <?php
 namespace App\Models\adherent;
 
+use App\Models\Event\Participant;
+use App\Models\Event\Payeur;
 
 trait AdherentRelationship{
     public function cotiser(){
@@ -33,6 +35,14 @@ trait AdherentRelationship{
 
     public function sector(){
         return  $this->belongsTo('App\Models\Sector','sector_id');
+    }
+
+    public function participant(){
+        return $this->hasMany(Participant::class,'adherent_id');
+    }
+
+    public function payeur(){
+        return $this->hasMany(Payeur::class,'adherent_id');
     }
 
 }

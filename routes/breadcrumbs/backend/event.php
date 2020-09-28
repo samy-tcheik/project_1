@@ -17,12 +17,27 @@ Breadcrumbs::for('admin.event.edit',function ($trail){
     $trail->push('Edit event', url('admin/avent/edit'));
 });
 
-Breadcrumbs::for('admin.participant.create',function($trail){
+Breadcrumbs::for('admin.participant.create',function ($trail){
     $trail->parent('admin.event.index');
     $trail->push('Créer Participant', url('admin/event/participant/create'));
 });
 
-Breadcrumbs::for('admin.participant.list',function($trail){
+Breadcrumbs::for('admin.participant.list',function ($trail){
     $trail->parent('admin.event.index');
     $trail->push('Emargement', url('admin/event/emargement'));
+});
+
+Breadcrumbs::for('admin.participant.edit',function ($trail){
+    $trail->parent('admin.event.index');
+    $trail->push('Edit Participant', url('admin/event/edit_participant'));
+});
+
+Breadcrumbs::for('admin.payeur.edit',function ($trail){
+    $trail->parent('admin.event.index');
+    $trail->push('Edit Payeur',url('admin/event/edit_Payeur'));
+});
+
+Breadcrumbs::for('admin.event.creance',function ($trail){
+    $trail->parent('admin.event.index');
+    $trail->push('Creance Evenment',url('admin/event/creance'));
 });

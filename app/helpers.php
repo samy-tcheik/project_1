@@ -162,3 +162,21 @@ if (! function_exists('camelcase_to_word')) {
         /x', $str));
     }
 }
+
+if (! function_exists('percentage')){
+    /**
+     * @param integer $number
+     * @param integer $total
+     * 
+     * @return integer
+     */
+    function percentage($total,$number)
+            {
+                if ($total == 0 || $number == 0){
+                    $percentage = 0;
+                } else{
+                    $percentage = ($number/$total) * 100;
+                }
+                return round($percentage);
+            };
+}
